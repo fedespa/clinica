@@ -1,5 +1,6 @@
 package com.example.Clinica.modules.admission.model;
 
+import com.example.Clinica.common.audit.AuditableEntity;
 import com.example.Clinica.modules.patient.model.Patient;
 import com.example.Clinica.security.user.AppUser;
 import jakarta.persistence.*;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Admission {
+public class Admission extends AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

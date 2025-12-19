@@ -1,5 +1,6 @@
 package com.example.Clinica.modules.admission.model;
 
+import com.example.Clinica.common.audit.AuditableEntity;
 import com.example.Clinica.security.user.AppUser;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TriageLog {
+public class TriageLog extends AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +33,7 @@ public class TriageLog {
     private LocalDateTime changeDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "changed_by")
+    @JoinColumn(name = "changed_By")
     private AppUser user;
 
 }

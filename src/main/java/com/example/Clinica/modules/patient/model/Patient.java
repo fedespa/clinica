@@ -1,18 +1,18 @@
 package com.example.Clinica.modules.patient.model;
 
+import com.example.Clinica.common.audit.AuditableEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "patients")
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @Builder
-public class Patient {
+public class Patient extends AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,13 +29,5 @@ public class Patient {
     private LocalDate birthDate;
 
     private String phoneNumber;
-
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
 
 }
