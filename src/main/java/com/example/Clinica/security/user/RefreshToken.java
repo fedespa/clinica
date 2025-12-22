@@ -1,6 +1,6 @@
 package com.example.Clinica.security.user;
 
-import com.example.Clinica.common.audit.AuditableEntity;
+import com.example.Clinica.common.audit.FullAuditableEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +9,7 @@ import java.time.Instant;
 @Entity
 @Table(name = "refresh_tokens")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-public class RefreshToken extends AuditableEntity {
+public class RefreshToken extends FullAuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +20,12 @@ public class RefreshToken extends AuditableEntity {
     private AppUser user;
 
     @Column(nullable = false, unique = true)
-    private String token;
+    private String tokenHash;
 
     @Column(nullable = false)
-    private Instant expiryDate;
+    private Instant expiresAt;
+
+    private boolean revoked;
+
 
 }

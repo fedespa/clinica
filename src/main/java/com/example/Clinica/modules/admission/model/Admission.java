@@ -1,6 +1,6 @@
 package com.example.Clinica.modules.admission.model;
 
-import com.example.Clinica.common.audit.AuditableEntity;
+import com.example.Clinica.common.audit.FullAuditableEntity;
 import com.example.Clinica.modules.patient.model.Patient;
 import com.example.Clinica.security.user.AppUser;
 import jakarta.persistence.*;
@@ -14,13 +14,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Admission extends AuditableEntity {
+public class Admission extends FullAuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
     @Enumerated(EnumType.STRING)

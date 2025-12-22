@@ -1,6 +1,6 @@
 package com.example.Clinica.security.user;
 
-import com.example.Clinica.common.audit.AuditableEntity;
+import com.example.Clinica.common.audit.FullAuditableEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,19 +10,20 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-public class AppUser extends AuditableEntity {
+public class AppUser extends FullAuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String name;
+    @Column(nullable = false)
+    private String firstName;
 
     @Column(nullable = false)
     private String password;
 
-    private String fullName;
+    @Column(nullable = false)
+    private String lastName;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

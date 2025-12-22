@@ -1,6 +1,6 @@
 package com.example.Clinica.modules.patient.model;
 
-import com.example.Clinica.common.audit.AuditableEntity;
+import com.example.Clinica.common.audit.FullAuditableEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @Builder
-public class Patient extends AuditableEntity {
+public class Patient extends FullAuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
