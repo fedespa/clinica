@@ -1,4 +1,4 @@
-package com.example.Clinica.security.user;
+package com.example.Clinica.security.user.model;
 
 import jakarta.persistence.*;
 import lombok.*;

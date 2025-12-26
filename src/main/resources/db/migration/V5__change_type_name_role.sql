@@ -1,0 +1,4 @@
+ALTER TABLE roles
+    ALTER COLUMN name TYPE VARCHAR(50);
+
+DROP TYPE IF EXISTS role_name;

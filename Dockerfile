@@ -18,5 +18,4 @@ COPY ./src /root/src
 RUN ./mvnw clean install -DskipTests
 
 # Levantar aplicacion cuando el contenedor inicie
-# ENTRYPOINT ["java", "-jar", ""]
 CMD ["./mvnw", "spring-boot:run"]

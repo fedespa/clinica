@@ -1,6 +1,8 @@
-package com.example.Clinica.security.user;
+package com.example.Clinica.security.user.model;
 
 import com.example.Clinica.common.audit.FullAuditableEntity;
+import com.example.Clinica.modules.staff.model.DoctorProfile;
+import com.example.Clinica.modules.staff.model.NurseProfile;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,7 +11,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -27,10 +28,10 @@ public class AppUser extends FullAuditableEntity {
     private String firstName;
 
     @Column(nullable = false)
-    private String password;
+    private String lastName;
 
     @Column(nullable = false)
-    private String lastName;
+    private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -48,6 +49,12 @@ public class AppUser extends FullAuditableEntity {
     )
     private Set<PermissionEntity> permissions = new HashSet<>();
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private DoctorProfile doctorProfile;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private NurseProfile nurseProfile;
+
     @Column(nullable = false)
     private boolean accountNoExpired;
     @Column(nullable = false)
@@ -64,15 +71,14 @@ public class AppUser extends FullAuditableEntity {
             authorities.add(new SimpleGrantedAuthority(role.getName().name()));
 
             role.getPermissions().forEach(p -> {
-                authorities.add(new SimpleGrantedAuthority(p.getName()));
+                authorities.add(new SimpleGrantedAuthority(p.getName().name()));
             });
         });
 
         this.permissions.forEach(p -> {
-            authorities.add(new SimpleGrantedAuthority(p.getName()));
+            authorities.add(new SimpleGrantedAuthority(p.getName().name()));
         });
 
         return authorities;
     }
-
 }

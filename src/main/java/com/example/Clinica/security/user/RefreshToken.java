@@ -1,6 +1,7 @@
 package com.example.Clinica.security.user;
 
 import com.example.Clinica.common.audit.FullAuditableEntity;
+import com.example.Clinica.security.user.model.AppUser;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,6 +1,6 @@
 package com.example.Clinica.common.config;
 
-import com.example.Clinica.security.user.AppUser;
+import com.example.Clinica.security.user.model.AppUser;
 import com.example.Clinica.security.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,8 +22,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getEmail())
                 .password(user.getPassword())
+                .disabled(!user.isEnabled())
+                .accountExpired(!user.isAccountNoExpired())
+                .accountLocked(!user.isAccountNoLocked())
+                .credentialsExpired(!user.isCredentialsNoExpired())
                 .authorities(user.getAuthorities())
                 .build();
     }
+
 
 }

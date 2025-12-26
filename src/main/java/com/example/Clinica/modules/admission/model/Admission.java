@@ -2,7 +2,7 @@ package com.example.Clinica.modules.admission.model;
 
 import com.example.Clinica.common.audit.FullAuditableEntity;
 import com.example.Clinica.modules.patient.model.Patient;
-import com.example.Clinica.security.user.AppUser;
+import com.example.Clinica.security.user.model.AppUser;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
